@@ -11,6 +11,7 @@
       "size" : "16x16"
     },
     {
+      "filename" : "icon.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
