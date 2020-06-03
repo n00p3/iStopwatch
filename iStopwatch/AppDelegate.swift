@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
         statusItem.button?.action = #selector(itemClicked(_:))
         statusItem.button?.title = ""
+        statusItem.button?.imagePosition = .imageOverlaps
     
         self.statusItem = statusItem
     }
@@ -37,6 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if NSApp.currentEvent!.type == .rightMouseUp {
             print("right")
             self.statusItem.button?.title = ""
+            statusItem.button?.imagePosition = .imageOverlaps
             timer?.invalidate()
             self.time = 0.0
             self.isRunning = false
@@ -52,19 +54,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.button?.title = secondsToHoursMinutesSeconds(seconds: time)
         
         timer?.invalidate()
+        self.statusItem.button?.imagePosition = .imageLeft
         time = 0.0
         if isRunning {
             timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timer) in
                 self.time += timer.timeInterval
                 self.statusItem.button?.title = self.secondsToHoursMinutesSeconds(seconds: self.time)
+                
             }
         }
     }
     
     func secondsToHoursMinutesSeconds(seconds : Double) -> String {
-      let (hr,  minf) = modf (seconds / 3600)
-      let (min, secf) = modf (60 * minf)
-      return "\(String(format: "%02d", hr)):\(String(format: "%02d", min)):\(String(format: "%04.1f", 60 * secf))"
+        let (hr,  minf) = modf (seconds / 3600)
+        let (min, secf) = modf (60 * minf)
+        return "\(String(format: "%02d", hr)):\(String(format: "%02d", min)):\(String(format: "%04.1f", 60 * secf))"
     }
 }
 
