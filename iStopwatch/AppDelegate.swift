@@ -68,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func secondsToHoursMinutesSeconds(seconds : Double) -> String {
         let (hr,  minf) = modf (seconds / 3600)
         let (min, secf) = modf (60 * minf)
-        return "\(String(format: "%02d", hr)):\(String(format: "%02d", min)):\(String(format: "%04.1f", 60 * secf))"
+        return "\(String(format: "%02.0f", hr)):\(String(format: "%02.0f", min)):\(String(format: "%04.1f", 60 * secf))"
     }
 }
 
